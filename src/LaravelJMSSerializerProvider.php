@@ -12,13 +12,7 @@ class LaravelJMSSerializerProvider extends ServiceProvider {
         $config = $this->app['config']['jms-serializer'];
 
         // register JMS annotations
-        AnnotationRegistry::registerFile(
-            base_path('vendor/doctrine/orm/lib/Doctrine/ORM/Mapping/Driver/DoctrineAnnotations.php')
-        );
-        AnnotationRegistry::registerAutoloadNamespace(
-            'JMS\Serializer\Annotation',
-            base_path('vendor/jms/serializer/src')
-        );
+        AnnotationRegistry::registerLoader('class_exists');
 
         // set up naming strategies as per config
         $this->app->bind('serializer.naming-strategy.identical', Serializer\Naming\IdenticalPropertyNamingStrategy::class);
